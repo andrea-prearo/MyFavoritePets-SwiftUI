@@ -44,6 +44,10 @@
 		6972CB1728BD6020005C0115 /* MyFavoritePetsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFavoritePetsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6972CB1B28BD6020005C0115 /* MyFavoritePetsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoritePetsUITests.swift; sourceTree = "<group>"; };
 		6972CB1D28BD6020005C0115 /* MyFavoritePetsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoritePetsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6987B46628C2C84500E7DB0A /* CatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatApi.swift; sourceTree = "<group>"; };
+		6987B46928C2C84500E7DB0A /* CatBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreed.swift; sourceTree = "<group>"; };
+		6987B46A28C2C84500E7DB0A /* CatBreedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreedImage.swift; sourceTree = "<group>"; };
+		6987B46B28C2C84500E7DB0A /* CatBreedWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreedWeight.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 		6972CAFF28BD601E005C0115 /* MyFavoritePets */ = {
 			isa = PBXGroup;
 			children = (
+				6987B46828C2C84500E7DB0A /* Models */,
+				6987B46528C2C84500E7DB0A /* RemoteServices */,
 				6972CB0028BD601E005C0115 /* MyFavoritePetsApp.swift */,
 				6972CB0228BD601E005C0115 /* ContentView.swift */,
 				6972CB0428BD6020005C0115 /* Assets.xcassets */,
@@ -125,6 +131,24 @@
 				6972CB1D28BD6020005C0115 /* MyFavoritePetsUITestsLaunchTests.swift */,
 			);
 			path = MyFavoritePetsUITests;
+			sourceTree = "<group>";
+		};
+		6987B46528C2C84500E7DB0A /* RemoteServices */ = {
+			isa = PBXGroup;
+			children = (
+				6987B46628C2C84500E7DB0A /* CatApi.swift */,
+			);
+			path = RemoteServices;
+			sourceTree = "<group>";
+		};
+		6987B46828C2C84500E7DB0A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6987B46928C2C84500E7DB0A /* CatBreed.swift */,
+				6987B46A28C2C84500E7DB0A /* CatBreedImage.swift */,
+				6987B46B28C2C84500E7DB0A /* CatBreedWeight.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
