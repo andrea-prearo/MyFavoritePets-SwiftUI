@@ -15,11 +15,15 @@ struct CatBreedsView: View {
     var body: some View {
         NavigationView {
             List(viewModel.breeds) { breed in
-              NavigationLink(
-                destination: CatBreedDetailsView(breed: breed)) {
+                ZStack(alignment: .leading) {
+                    NavigationLink(
+                        destination: CatBreedDetailsView(breed: breed)) {
+                            EmptyView()
+                        }.opacity(0)
                     CatBreedRow(breed: breed)
-              }
-            }.navigationTitle("Cat Breeds")
+                }
+            }
+            .navigationTitle("Cat Breeds")
         }
     }
 }
