@@ -8,47 +8,51 @@
 import Foundation
 import SwiftUI
 
+extension CatBreedImage: Identifiable {}
+
 struct CatBreedDetailsView: View {
     private let viewModel: CatBreedDetailsViewModel
     private let breed: CatBreed
-    private let carouselItemHeight: CGFloat
-    private let defaultInsets = EdgeInsets(top: 8, leading: 16, bottom: 8,trailing: 16)
 
     private struct Constants {
+        static let defaultInsets = EdgeInsets(top: 8, leading: 16, bottom: 8,trailing: 16)
         static let separatorSize: CGFloat = 2
+        static let carouselItemHeight = UIScreen.main.bounds.height * 0.3 - Constants.defaultInsets.top - Constants.defaultInsets.bottom
     }
 
     init(viewModel: CatBreedDetailsViewModel) {
         self.viewModel = viewModel
         breed = viewModel.breed
-
-        carouselItemHeight = UIScreen.main.bounds.height * 0.3 - defaultInsets.top - defaultInsets.bottom
     }
 
     var body: some View {
         VStack(spacing: 8) {
-            ScrollView(.horizontal) {
-//                HStack(spacing: 8) {
-//                    ForEach(viewModel.breedImages) { image in
-//
-//                    }
-//                }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(viewModel.breedImages) { image in
+                        CatBreedCarouselImageView(breedImage: image,
+                                        size: CGSize(width: Constants.carouselItemHeight,
+                                                     height: Constants.carouselItemHeight))
+                    }
+                }
+                .padding()
             }
-            .frame(height: carouselItemHeight)
+            .frame(height: Constants.carouselItemHeight)
+            Spacer()
             Text(breed.description)
                 .multilineTextAlignment(.center)
-                .padding(defaultInsets)
+                .padding(Constants.defaultInsets)
             LineDivider()
                 .foregroundColor(Color.gray.opacity(0.5))
                 .frame(height: Constants.separatorSize)
-                .padding(defaultInsets)
+                .padding(Constants.defaultInsets)
             Text(breed.temperament)
                 .multilineTextAlignment(.center)
-                .padding(defaultInsets)
+                .padding(Constants.defaultInsets)
             Text("Origin: \(breed.origin)")
-                .padding(defaultInsets)
+                .padding(Constants.defaultInsets)
             Text(viewModel.formattedWeight())
-                .padding(defaultInsets)
+                .padding(Constants.defaultInsets)
         }
         .onAppear {
             viewModel.refreshBreedDetails()
