@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MyFavoritePetsApp: App {
+    @ObservedObject var viewModel = CatBreedsViewModel(api: CatApi.shared)
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CatBreedsView(viewModel:viewModel )
         }
     }
 }
