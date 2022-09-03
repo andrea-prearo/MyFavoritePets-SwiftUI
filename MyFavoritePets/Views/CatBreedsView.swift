@@ -17,13 +17,19 @@ struct CatBreedsView: View {
             List(viewModel.breeds) { breed in
                 ZStack(alignment: .leading) {
                     NavigationLink(
-                        destination: CatBreedDetailsView(breed: breed)) {
+                        destination: CatBreedDetailsView(
+                            viewModel: CatBreedDetailsViewModel(api: CatApi.shared, breed: breed)
+                        )) {
                             EmptyView()
                         }.opacity(0)
                     CatBreedRow(breed: breed)
                 }
             }
+            .listStyle(.plain)
             .navigationTitle("Cat Breeds")
+        }
+        .onAppear {
+            viewModel.refreshBreeds()
         }
     }
 }

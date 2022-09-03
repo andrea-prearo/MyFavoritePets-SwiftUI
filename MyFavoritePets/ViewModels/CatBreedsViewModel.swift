@@ -14,8 +14,6 @@ class CatBreedsViewModel: ObservableObject {
 
     init(api: CatApi) {
         self.api = api
-
-        refreshBreeds()
     }
 
     func refreshBreeds() {
