@@ -12,6 +12,7 @@ extension CatBreedImage: Identifiable {}
 
 struct CatBreedDetailsView: View {
     @ObservedObject private var viewModel: CatBreedDetailsViewModel
+    @State private var didReceiveError = false
     @State private var didSelectItem = false
     @State private var selectedItemIndex = -1
     private let breed: CatBreed
@@ -91,6 +92,19 @@ struct CatBreedDetailsView: View {
         .navigationBarTitle(breed.name)
         .onAppear {
             viewModel.refreshBreedDetails()
+        }
+        .onReceive(viewModel.$error, perform: { error in
+            if error == nil { return }
+            didReceiveError = true
+        })
+        .alert(isPresented: $didReceiveError) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.error?.localizedDescription ?? "Unknown error"),
+                dismissButton: .default(Text("OK")) {
+                    didReceiveError = false
+                }
+            )
         }
     }
 }

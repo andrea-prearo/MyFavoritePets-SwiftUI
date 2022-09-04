@@ -11,6 +11,7 @@ extension CatBreed: Identifiable {}
 
 struct CatBreedsView: View {
     @ObservedObject private var viewModel: CatBreedsViewModel
+    @State private var didReceiveError = false
 
     init(viewModel: CatBreedsViewModel) {
         self.viewModel = viewModel
@@ -37,6 +38,19 @@ struct CatBreedsView: View {
         }
         .onAppear {
             viewModel.refreshBreeds()
+        }
+        .onReceive(viewModel.$error, perform: { error in
+            if error == nil { return }
+            didReceiveError = true
+        })
+        .alert(isPresented: $didReceiveError) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.error?.localizedDescription ?? "Unknown error"),
+                dismissButton: .default(Text("OK")) {
+                    didReceiveError = false
+                }
+            )
         }
     }
 }

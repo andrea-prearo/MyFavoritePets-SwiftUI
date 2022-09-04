@@ -12,6 +12,7 @@ class CatBreedDetailsViewModel: ObservableObject {
     let breed: CatBreed
 
     @Published var breedImages = [CatBreedImage]()
+    @Published var error: Error?
 
     init(api: CatApi, breed: CatBreed) {
         self.api = api
@@ -21,12 +22,17 @@ class CatBreedDetailsViewModel: ObservableObject {
     func refreshBreedDetails() {
         Task {
             do {
+                DispatchQueue.main.async {
+                    self.error = nil
+                }
                 let breedImages = try await api.fetchBreedImages(breed: breed)
                 DispatchQueue.main.async {
                     self.breedImages = breedImages
                 }
             } catch {
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.error = error
+                }
             }
         }
     }
