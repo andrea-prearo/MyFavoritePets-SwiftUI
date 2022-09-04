@@ -11,7 +11,9 @@ import SwiftUI
 extension CatBreedImage: Identifiable {}
 
 struct CatBreedDetailsView: View {
-    private let viewModel: CatBreedDetailsViewModel
+    @ObservedObject private var viewModel: CatBreedDetailsViewModel
+    @State private var didSelectItem = false
+    @State private var selectedItemIndex = -1
     private let breed: CatBreed
 
     private struct Constants {
@@ -26,34 +28,70 @@ struct CatBreedDetailsView: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(viewModel.breedImages) { image in
-                        CatBreedCarouselImageView(breedImage: image,
-                                        size: CGSize(width: Constants.carouselItemHeight,
-                                                     height: Constants.carouselItemHeight))
+        NavigationView {
+            VStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(viewModel.breedImages) { image in
+                            ZStack {
+                                CatBreedCarouselImageView(
+                                    breedImage: image,
+                                    size: CGSize(
+                                        width: Constants.carouselItemHeight,
+                                        height: Constants.carouselItemHeight
+                                    )
+                                )
+                                .onTapGesture {
+                                    selectedItemIndex = 0
+                                    didSelectItem = true
+                                }
+                                NavigationLink(isActive: $didSelectItem) {
+                                    CatBreedCarouselView(
+                                        viewModel: viewModel,
+                                        selectedItemIndex: $selectedItemIndex.wrappedValue
+                                    )
+                                } label: {
+                                    Text("Hidden link to carousel view")
+                                }
+                                .hidden()
+                            }
+                        }
                     }
+                    .padding(Constants.defaultInsets)
+                    Spacer()
                 }
-                .padding()
+                .padding(.bottom)
+                Spacer()
+                VStack {
+                    Spacer()
+                    Text(breed.description)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(Constants.defaultInsets)
+                    LineDivider()
+                        .foregroundColor(Color.gray.opacity(0.5))
+                        .frame(height: Constants.separatorSize)
+                        .padding(Constants.defaultInsets)
+                    Text(breed.temperament)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(Constants.defaultInsets)
+                    Text("Origin: \(breed.origin)")
+                        .padding(Constants.defaultInsets)
+                    Text(viewModel.formattedWeight())
+                        .padding(Constants.defaultInsets)
+                    Spacer()
+                }
+                .padding(.bottom)
+                Spacer()
             }
-            .frame(height: Constants.carouselItemHeight)
+            .padding(.bottom)
             Spacer()
-            Text(breed.description)
-                .multilineTextAlignment(.center)
-                .padding(Constants.defaultInsets)
-            LineDivider()
-                .foregroundColor(Color.gray.opacity(0.5))
-                .frame(height: Constants.separatorSize)
-                .padding(Constants.defaultInsets)
-            Text(breed.temperament)
-                .multilineTextAlignment(.center)
-                .padding(Constants.defaultInsets)
-            Text("Origin: \(breed.origin)")
-                .padding(Constants.defaultInsets)
-            Text(viewModel.formattedWeight())
-                .padding(Constants.defaultInsets)
         }
+        .padding(.bottom)
+        .navigationBarTitle(breed.name)
         .onAppear {
             viewModel.refreshBreedDetails()
         }

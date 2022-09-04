@@ -32,6 +32,5 @@ struct CatBreedCarouselImageView: View {
             .setProcessor(processor)
             .fade(duration: 1)
             .cacheOriginalImage()
-            .frame(width: size.width, height: size.height)
     }
 }

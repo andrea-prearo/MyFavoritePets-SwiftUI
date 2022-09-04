@@ -13,7 +13,7 @@ struct MyFavoritePetsApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CatBreedsView(viewModel:viewModel )
+            CatBreedsView(viewModel:viewModel)
         }
     }
 }

@@ -10,19 +10,26 @@ import SwiftUI
 extension CatBreed: Identifiable {}
 
 struct CatBreedsView: View {
-    @ObservedObject var viewModel: CatBreedsViewModel
+    @ObservedObject private var viewModel: CatBreedsViewModel
+
+    init(viewModel: CatBreedsViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         NavigationView {
             List(viewModel.breeds) { breed in
                 ZStack(alignment: .leading) {
+                    CatBreedRow(breed: breed)
                     NavigationLink(
                         destination: CatBreedDetailsView(
-                            viewModel: CatBreedDetailsViewModel(api: CatApi.shared, breed: breed)
-                        )) {
-                            EmptyView()
-                        }.opacity(0)
-                    CatBreedRow(breed: breed)
+                            viewModel: CatBreedDetailsViewModel(
+                                api: CatApi.shared,
+                                breed: breed)
+                        )
+                    ) {
+                        EmptyView()
+                    }.opacity(0)
                 }
             }
             .listStyle(.plain)
@@ -33,9 +40,3 @@ struct CatBreedsView: View {
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
