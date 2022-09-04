@@ -34,9 +34,6 @@ extension CatApiError: LocalizedError {
 }
 
 class CatApi {
-    typealias FetchBreedsCompletionBlock = (Result<[CatBreed], CatApiError>) -> Void
-    typealias FetchBreedImagesCompletionBlock = (Result<[CatBreedImage], CatApiError>) -> Void
-
     static let shared = CatApi()
 
     private let baseUrl: String
@@ -45,50 +42,56 @@ class CatApi {
         self.baseUrl = baseUrl
     }
 
-    func fetchBreeds(completion: @escaping FetchBreedsCompletionBlock) {
+    func fetchBreeds() async throws -> [CatBreed] {
         let urlString = "\(baseUrl)/breeds"
         guard let url = URL(string: urlString) else {
-            return completion(.failure(.invalidUrl(urlString)))
+            throw CatApiError.invalidUrl(urlString)
         }
-        let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request) {data, response, error in
-            if let error = error {
-                return completion(.failure(.failure(error)))
+
+
+        return try await withUnsafeThrowingContinuation { continuation in
+            let request = URLRequest(url: url)
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    return continuation.resume(throwing: CatApiError.failure(error))
+                }
+                guard let data = data else {
+                    return continuation.resume(throwing: CatApiError.invalidData)
+                }
+                do {
+                    let catBreeds = try JSONDecoder().decode([CatBreed].self, from: data)
+                    return continuation.resume(returning: catBreeds)
+                } catch {
+                    return continuation.resume(throwing: CatApiError.failure(error))
+                }
             }
-            guard let data = data else {
-                return completion(.failure(.invalidData))
-            }
-            do {
-                let catBreeds = try JSONDecoder().decode([CatBreed].self, from: data)
-                return completion(.success(catBreeds))
-            } catch {
-                return completion(.failure(.failure(error)))
-            }
+            task.resume()
         }
-        task.resume()
     }
 
-    func fetchBreedImagess(breed: CatBreed,
-                           completion: @escaping FetchBreedImagesCompletionBlock) {
-        let urlString = "\(baseUrl)/images/search?breed_ids=beng&limit=8"
+    func fetchBreedImages(breed: CatBreed) async throws -> [CatBreedImage] {
+        let urlString = "\(baseUrl)/images/search?breed_ids=\(breed.id)&limit=8"
         guard let url = URL(string: urlString) else {
-            return completion(.failure(.invalidUrl(urlString)))
+            throw CatApiError.invalidUrl(urlString)
         }
-        let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request) {data, response, error in
-            if let error = error {
-                return completion(.failure(.failure(error)))
+
+        return try await withUnsafeThrowingContinuation { continuation in
+            let request = URLRequest(url: url)
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    return continuation.resume(throwing: CatApiError.failure(error))
+                }
+                guard let data = data else {
+                    return continuation.resume(throwing: CatApiError.invalidData)
+                }
+                do {
+                    let catBreedImages = try JSONDecoder().decode([CatBreedImage].self, from: data)
+                    return continuation.resume(returning: catBreedImages)
+                } catch {
+                    return continuation.resume(throwing: CatApiError.failure(error))
+                }
             }
-            guard let data = data else {
-                return completion(.failure(.invalidData))
-            }
-            do {
-                let catBreedImages = try JSONDecoder().decode([CatBreedImage].self, from: data)
-                return completion(.success(catBreedImages))
-            } catch {
-                return completion(.failure(.failure(error)))
-            }
+            task.resume()
         }
-        task.resume()
     }
 }

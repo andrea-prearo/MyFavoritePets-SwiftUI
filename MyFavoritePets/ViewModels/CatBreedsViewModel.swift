@@ -19,14 +19,14 @@ class CatBreedsViewModel: ObservableObject {
     }
 
     func refreshBreeds() {
-        api.fetchBreeds { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-                case .failure(let error):
-                    // TODO
-                    break
-                case .success(let breeds):
+        Task {
+            do {
+                let breeds = try await api.fetchBreeds()
+                DispatchQueue.main.async {
                     self.breeds = breeds
+                }
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
