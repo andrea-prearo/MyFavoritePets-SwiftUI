@@ -28,63 +28,60 @@ struct CatBreedDetailsView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        ForEach(viewModel.breedImages) { image in
-                            ZStack {
-                                CatBreedCarouselImageView(
-                                    breedImage: image,
-                                    size: CGSize(
-                                        width: Constants.carouselItemHeight,
-                                        height: Constants.carouselItemHeight
-                                    )
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(viewModel.breedImages) { image in
+                        ZStack {
+                            CatBreedCarouselImageView(
+                                breedImage: image,
+                                size: CGSize(
+                                    width: Constants.carouselItemHeight,
+                                    height: Constants.carouselItemHeight
                                 )
-                                .onTapGesture {
-                                    selectedItemIndex = 0
-                                    didSelectItem = true
-                                }
-                                NavigationLink(isActive: $didSelectItem) {
-                                    CatBreedCarouselView(
-                                        viewModel: viewModel,
-                                        selectedItemIndex: $selectedItemIndex.wrappedValue
-                                    )
-                                } label: {
-                                    Text("Hidden link to carousel view")
-                                }
-                                .hidden()
+                            )
+                            .onTapGesture {
+                                selectedItemIndex = 0
+                                didSelectItem = true
                             }
+                            NavigationLink(isActive: $didSelectItem) {
+                                CatBreedCarouselView(
+                                    viewModel: viewModel,
+                                    selectedItemIndex: $selectedItemIndex.wrappedValue
+                                )
+                            } label: {
+                                Text("Hidden link to carousel view")
+                            }
+                            .hidden()
                         }
                     }
-                    .padding(Constants.defaultInsets)
-                    Spacer()
                 }
-                .padding(.bottom)
+                .padding(Constants.defaultInsets)
                 Spacer()
-                VStack {
-                    Spacer()
-                    Text(breed.description)
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(Constants.defaultInsets)
-                    LineDivider()
-                        .foregroundColor(Color.gray.opacity(0.5))
-                        .frame(height: Constants.separatorSize)
-                        .padding(Constants.defaultInsets)
-                    Text(breed.temperament)
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(Constants.defaultInsets)
-                    Text("Origin: \(breed.origin)")
-                        .padding(Constants.defaultInsets)
-                    Text(viewModel.formattedWeight())
-                        .padding(Constants.defaultInsets)
-                    Spacer()
-                }
-                .padding(.bottom)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.bottom)
+            Spacer()
+            VStack {
+                Spacer()
+                Text(breed.description)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(Constants.defaultInsets)
+                LineDivider()
+                    .foregroundColor(Color.gray.opacity(0.5))
+                    .frame(height: Constants.separatorSize)
+                    .padding(Constants.defaultInsets)
+                Text(breed.temperament)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(Constants.defaultInsets)
+                Text("Origin: \(breed.origin)")
+                    .padding(Constants.defaultInsets)
+                Text(viewModel.formattedWeight())
+                    .padding(Constants.defaultInsets)
                 Spacer()
             }
             .padding(.bottom)
