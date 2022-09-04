@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CatBreedImage: Codable {
+struct CatBreedImage: Codable, Equatable {
     let id: String
     let width: Int
     let height: Int

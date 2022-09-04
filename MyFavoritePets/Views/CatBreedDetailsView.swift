@@ -14,13 +14,15 @@ struct CatBreedDetailsView: View {
     @ObservedObject private var viewModel: CatBreedDetailsViewModel
     @State private var didReceiveError = false
     @State private var didSelectItem = false
-    @State private var selectedItemIndex = -1
+    @State private var selectedItemIndex: Int?
     private let breed: CatBreed
 
     private struct Constants {
         static let defaultInsets = EdgeInsets(top: 8, leading: 16, bottom: 8,trailing: 16)
         static let separatorSize: CGFloat = 2
         static let carouselImageSize = CGSize(width: 200, height: 200)
+        static let viewWidth = Int(UIScreen.main.bounds.width)
+        static let viewHeight = Int(UIScreen.main.bounds.height - 80)
     }
 
     init(viewModel: CatBreedDetailsViewModel) {
@@ -37,12 +39,31 @@ struct CatBreedDetailsView: View {
                             ZStack {
                                 CatBreedCarouselImageView(
                                     breedImage: image,
-                                    size: Constants.carouselImageSize
+                                    size: Constants.carouselImageSize,
+                                    justFit: false
                                 )
                                 .onTapGesture {
-                                    selectedItemIndex = 0
+                                    selectedItemIndex = viewModel.breedImages.firstIndex(where: { img in
+                                        img == image
+                                    })
                                     didSelectItem = true
                                 }
+                                NavigationLink(isActive: $didSelectItem) {
+                                    PageView(pages: viewModel.breedImages.map { image in
+                                        CatBreedCarouselImageView(breedImage: image,
+                                                                  size: CGSize(width: Constants.viewWidth,
+                                                                               height: Constants.viewHeight),
+                                                                  justFit: true)
+                                        },
+                                        pageIndicatorTintColor: .gray,
+                                        currentPageIndicatorTintColor: .black,
+                                        selectedPage: $selectedItemIndex
+                                    )
+                                    .navigationBarTitle(breed.name)
+                                } label: {
+                                    Text("Hidden link to carousel view")
+                                }
+                                .hidden()
                             }
                         }
                     }
@@ -73,11 +94,9 @@ struct CatBreedDetailsView: View {
                     Spacer()
                 }
                 .scaledToFit()
-                .padding(.bottom)
                 Spacer()
             }
         }
-        .padding(.bottom)
         .navigationBarTitle(breed.name)
         .onAppear {
             viewModel.refreshBreedDetails()
