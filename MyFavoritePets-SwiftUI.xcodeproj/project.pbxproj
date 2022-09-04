@@ -46,13 +46,13 @@
 
 /* Begin PBXFileReference section */
 		6942D77828C30F1D00363336 /* CatBreedCarouselImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreedCarouselImageView.swift; sourceTree = "<group>"; };
-		6972CAFD28BD601E005C0115 /* MyFavoritePets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFavoritePets.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6972CAFD28BD601E005C0115 /* MyFavoritePets-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyFavoritePets-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6972CB0028BD601E005C0115 /* MyFavoritePetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoritePetsApp.swift; sourceTree = "<group>"; };
 		6972CB0428BD6020005C0115 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6972CB0728BD6020005C0115 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		6972CB0D28BD6020005C0115 /* MyFavoritePetsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFavoritePetsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6972CB0D28BD6020005C0115 /* MyFavoritePets-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MyFavoritePets-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6972CB1128BD6020005C0115 /* MyFavoritePetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoritePetsTests.swift; sourceTree = "<group>"; };
-		6972CB1728BD6020005C0115 /* MyFavoritePetsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFavoritePetsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6972CB1728BD6020005C0115 /* MyFavoritePets-SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MyFavoritePets-SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6972CB1B28BD6020005C0115 /* MyFavoritePetsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoritePetsUITests.swift; sourceTree = "<group>"; };
 		6972CB1D28BD6020005C0115 /* MyFavoritePetsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavoritePetsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6987B46628C2C84500E7DB0A /* CatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatApi.swift; sourceTree = "<group>"; };
@@ -106,9 +106,9 @@
 		6972CAFE28BD601E005C0115 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6972CAFD28BD601E005C0115 /* MyFavoritePets.app */,
-				6972CB0D28BD6020005C0115 /* MyFavoritePetsTests.xctest */,
-				6972CB1728BD6020005C0115 /* MyFavoritePetsUITests.xctest */,
+				6972CAFD28BD601E005C0115 /* MyFavoritePets-SwiftUI.app */,
+				6972CB0D28BD6020005C0115 /* MyFavoritePets-SwiftUITests.xctest */,
+				6972CB1728BD6020005C0115 /* MyFavoritePets-SwiftUIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,9 +194,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6972CAFC28BD601E005C0115 /* MyFavoritePets */ = {
+		6972CAFC28BD601E005C0115 /* MyFavoritePets-SwiftUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6972CB2128BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets" */;
+			buildConfigurationList = 6972CB2128BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets-SwiftUI" */;
 			buildPhases = (
 				6972CAF928BD601E005C0115 /* Sources */,
 				6972CAFA28BD601E005C0115 /* Frameworks */,
@@ -206,17 +206,17 @@
 			);
 			dependencies = (
 			);
-			name = MyFavoritePets;
+			name = "MyFavoritePets-SwiftUI";
 			packageProductDependencies = (
 				6987B48428C2FE6400E7DB0A /* Kingfisher */,
 			);
 			productName = MyFavoritePets;
-			productReference = 6972CAFD28BD601E005C0115 /* MyFavoritePets.app */;
+			productReference = 6972CAFD28BD601E005C0115 /* MyFavoritePets-SwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6972CB0C28BD6020005C0115 /* MyFavoritePetsTests */ = {
+		6972CB0C28BD6020005C0115 /* MyFavoritePets-SwiftUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6972CB2428BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePetsTests" */;
+			buildConfigurationList = 6972CB2428BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets-SwiftUITests" */;
 			buildPhases = (
 				6972CB0928BD6020005C0115 /* Sources */,
 				6972CB0A28BD6020005C0115 /* Frameworks */,
@@ -227,14 +227,14 @@
 			dependencies = (
 				6972CB0F28BD6020005C0115 /* PBXTargetDependency */,
 			);
-			name = MyFavoritePetsTests;
+			name = "MyFavoritePets-SwiftUITests";
 			productName = MyFavoritePetsTests;
-			productReference = 6972CB0D28BD6020005C0115 /* MyFavoritePetsTests.xctest */;
+			productReference = 6972CB0D28BD6020005C0115 /* MyFavoritePets-SwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6972CB1628BD6020005C0115 /* MyFavoritePetsUITests */ = {
+		6972CB1628BD6020005C0115 /* MyFavoritePets-SwiftUIUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6972CB2728BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePetsUITests" */;
+			buildConfigurationList = 6972CB2728BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets-SwiftUIUITests" */;
 			buildPhases = (
 				6972CB1328BD6020005C0115 /* Sources */,
 				6972CB1428BD6020005C0115 /* Frameworks */,
@@ -245,9 +245,9 @@
 			dependencies = (
 				6972CB1928BD6020005C0115 /* PBXTargetDependency */,
 			);
-			name = MyFavoritePetsUITests;
+			name = "MyFavoritePets-SwiftUIUITests";
 			productName = MyFavoritePetsUITests;
-			productReference = 6972CB1728BD6020005C0115 /* MyFavoritePetsUITests.xctest */;
+			productReference = 6972CB1728BD6020005C0115 /* MyFavoritePets-SwiftUIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -273,7 +273,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6972CAF828BD601E005C0115 /* Build configuration list for PBXProject "MyFavoritePets" */;
+			buildConfigurationList = 6972CAF828BD601E005C0115 /* Build configuration list for PBXProject "MyFavoritePets-SwiftUI" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -289,9 +289,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6972CAFC28BD601E005C0115 /* MyFavoritePets */,
-				6972CB0C28BD6020005C0115 /* MyFavoritePetsTests */,
-				6972CB1628BD6020005C0115 /* MyFavoritePetsUITests */,
+				6972CAFC28BD601E005C0115 /* MyFavoritePets-SwiftUI */,
+				6972CB0C28BD6020005C0115 /* MyFavoritePets-SwiftUITests */,
+				6972CB1628BD6020005C0115 /* MyFavoritePets-SwiftUIUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -364,12 +364,12 @@
 /* Begin PBXTargetDependency section */
 		6972CB0F28BD6020005C0115 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6972CAFC28BD601E005C0115 /* MyFavoritePets */;
+			target = 6972CAFC28BD601E005C0115 /* MyFavoritePets-SwiftUI */;
 			targetProxy = 6972CB0E28BD6020005C0115 /* PBXContainerItemProxy */;
 		};
 		6972CB1928BD6020005C0115 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6972CAFC28BD601E005C0115 /* MyFavoritePets */;
+			target = 6972CAFC28BD601E005C0115 /* MyFavoritePets-SwiftUI */;
 			targetProxy = 6972CB1828BD6020005C0115 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -497,6 +497,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyFavoritePets/Preview Content\"";
+				DEVELOPMENT_TEAM = 5BZJ5S7SH7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -509,7 +510,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aprearo.MyFavoritePets;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aprearo.MyFavoritePets-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -525,6 +526,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyFavoritePets/Preview Content\"";
+				DEVELOPMENT_TEAM = 5BZJ5S7SH7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -537,7 +539,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aprearo.MyFavoritePets;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aprearo.MyFavoritePets-SwiftUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -560,7 +562,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFavoritePets.app/MyFavoritePets";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFavoritePets-SwiftUI.app/MyFavoritePets-SwiftUI";
 			};
 			name = Debug;
 		};
@@ -579,7 +581,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFavoritePets.app/MyFavoritePets";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFavoritePets-SwiftUI.app/MyFavoritePets-SwiftUI";
 			};
 			name = Release;
 		};
@@ -620,7 +622,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6972CAF828BD601E005C0115 /* Build configuration list for PBXProject "MyFavoritePets" */ = {
+		6972CAF828BD601E005C0115 /* Build configuration list for PBXProject "MyFavoritePets-SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6972CB1F28BD6020005C0115 /* Debug */,
@@ -629,7 +631,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6972CB2128BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets" */ = {
+		6972CB2128BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets-SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6972CB2228BD6020005C0115 /* Debug */,
@@ -638,7 +640,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6972CB2428BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePetsTests" */ = {
+		6972CB2428BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets-SwiftUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6972CB2528BD6020005C0115 /* Debug */,
@@ -647,7 +649,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6972CB2728BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePetsUITests" */ = {
+		6972CB2728BD6020005C0115 /* Build configuration list for PBXNativeTarget "MyFavoritePets-SwiftUIUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6972CB2828BD6020005C0115 /* Debug */,

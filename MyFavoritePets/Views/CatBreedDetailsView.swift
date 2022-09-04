@@ -43,15 +43,6 @@ struct CatBreedDetailsView: View {
                                     selectedItemIndex = 0
                                     didSelectItem = true
                                 }
-                                NavigationLink(isActive: $didSelectItem) {
-                                    CatBreedCarouselView(
-                                        viewModel: viewModel,
-                                        selectedItemIndex: $selectedItemIndex.wrappedValue
-                                    )
-                                } label: {
-                                    Text("Hidden link to carousel view")
-                                }
-                                .hidden()
                             }
                         }
                     }
