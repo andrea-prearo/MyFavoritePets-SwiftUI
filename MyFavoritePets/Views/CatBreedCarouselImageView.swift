@@ -22,9 +22,10 @@ struct CatBreedCarouselImageView: View {
         self.breedImage = breedImage
         self.size = size
         if justFit == false {
-            processor = CroppingImageProcessor(size: CGSize(width: size.width, height: size.height),
-                                               anchor: CGPoint(x: 0.5, y: 0.5))
-            |> RoundCornerImageProcessor(cornerRadius: Constants.imageRadius)
+            processor = DownsamplingImageProcessor(size: CGSize(width: size.width * 2.0, height: size.height * 2.0))
+                |> CroppingImageProcessor(size: CGSize(width: size.width, height: size.height),
+                                          anchor: CGPoint(x: 0.5, y: 0.5))
+                |> RoundCornerImageProcessor(cornerRadius: Constants.imageRadius)
         } else {
             processor = nil
         }
