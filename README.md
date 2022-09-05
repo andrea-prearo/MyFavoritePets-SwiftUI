@@ -1,10 +1,15 @@
 # MyFavoritePets-SwiftUI
-SwiftUI app to showcase [The 🐈‍⬛ API](https://thecatapi.com/) using a shared repository.
+SwiftUI app to showcase [The 🐈‍⬛ API](https://thecatapi.com/).
+
+![demo](./assets/MyFavoritePets-SwiftUI.gif)
 
 # Features:
 * Show breeds list
-* See breed detailed info and image carousel
+* Show breed detailed info and thumbnails carousel
+* Full screen breed images carousel
 
-## Possible evolutions
-* Implement image search feature.
-* Allow user to switch between cats ([The 🐈‍⬛ API](https://thecatapi.com/)) and dogs ([The 🐕 API](https://thedogapi.com/)).
+## Possible future work
+* Offline data persistence
+* Search bar for breeds
+* Favorite breeds/images
+* Tab bar to switch between cats ([The 🐈‍⬛ API](https://thecatapi.com/)) and dogs ([The 🐕 API](https://thedogapi.com/))
