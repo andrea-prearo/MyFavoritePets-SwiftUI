@@ -12,6 +12,15 @@ extension CatBreed: Identifiable {}
 struct CatBreedsView: View {
     @ObservedObject private var viewModel: CatBreedsViewModel
     @State private var didReceiveError = false
+    @State private var searchText = ""
+
+    private var filteredCatBreeds: [CatBreed] {
+        if searchText.isEmpty {
+            return viewModel.breeds
+        } else {
+            return viewModel.breeds.filter { $0.name.contains(searchText) }
+        }
+    }
 
     init(viewModel: CatBreedsViewModel) {
         self.viewModel = viewModel
@@ -19,7 +28,7 @@ struct CatBreedsView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.breeds) { breed in
+            List(filteredCatBreeds) { breed in
                 ZStack(alignment: .leading) {
                     CatBreedRow(breed: breed)
                     NavigationLink(
@@ -36,6 +45,7 @@ struct CatBreedsView: View {
             .listStyle(.plain)
             .navigationTitle("Cat Breeds")
         }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .onAppear {
             viewModel.refreshBreeds()
         }

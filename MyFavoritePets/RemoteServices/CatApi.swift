@@ -48,7 +48,6 @@ class CatApi {
             throw CatApiError.invalidUrl(urlString)
         }
 
-
         return try await withUnsafeThrowingContinuation { continuation in
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
