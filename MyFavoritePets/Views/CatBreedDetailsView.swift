@@ -101,10 +101,10 @@ struct CatBreedDetailsView: View {
         .onAppear {
             viewModel.refreshBreedDetails()
         }
-        .onReceive(viewModel.$error, perform: { error in
+        .onReceive(viewModel.$error) { error in
             if error == nil { return }
             didReceiveError = true
-        })
+        }
         .alert(isPresented: $didReceiveError) {
             Alert(
                 title: Text("Error"),

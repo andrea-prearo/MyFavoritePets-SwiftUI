@@ -13,6 +13,7 @@ struct CatBreedsView: View {
     @ObservedObject private var viewModel: CatBreedsViewModel
     @State private var didReceiveError = false
     @State private var searchText = ""
+    @State private var isLoading = false
 
     private var filteredCatBreeds: [CatBreed] {
         if searchText.isEmpty {
@@ -28,31 +29,41 @@ struct CatBreedsView: View {
 
     var body: some View {
         NavigationView {
-            List(filteredCatBreeds) { breed in
-                ZStack(alignment: .leading) {
-                    CatBreedRow(breed: breed)
-                    NavigationLink(
-                        destination: CatBreedDetailsView(
-                            viewModel: CatBreedDetailsViewModel(
-                                api: CatApi.shared,
-                                breed: breed)
-                        )
-                    ) {
-                        EmptyView()
-                    }.opacity(0)
+            ZStack {
+                if isLoading {
+                    ProgressView()
+                        .scaleEffect(2.5)
                 }
+                List(filteredCatBreeds) { breed in
+                    ZStack(alignment: .leading) {
+                        CatBreedRow(breed: breed)
+                        NavigationLink(
+                            destination: CatBreedDetailsView(
+                                viewModel: CatBreedDetailsViewModel(
+                                    api: CatApi.shared,
+                                    breed: breed)
+                            )
+                        ) {
+                            EmptyView()
+                        }
+                        .opacity(0)
+                    }
+                }
+                .listStyle(.plain)
             }
-            .listStyle(.plain)
             .navigationTitle("Cat Breeds")
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .onAppear {
+            isLoading = true
             viewModel.refreshBreeds()
         }
-        .onReceive(viewModel.$error, perform: { error in
+        .onReceive(viewModel.$error) { error in
             if error == nil { return }
+            isLoading = false
             didReceiveError = true
-        })
+        }
+        .onReceive(viewModel.$breeds) { _ in isLoading = false }
         .alert(isPresented: $didReceiveError) {
             Alert(
                 title: Text("Error"),
