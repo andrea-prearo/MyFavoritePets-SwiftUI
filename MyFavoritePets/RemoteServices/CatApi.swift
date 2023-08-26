@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CatApiRequestDelegate: AnyObject {
-    func didUpdate(error: CatApiError?)
-}
-
 enum CatApiError: Error {
     case failure(Error)
     case invalidUrl(String)
