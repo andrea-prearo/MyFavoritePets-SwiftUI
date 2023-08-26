@@ -12,6 +12,7 @@ SwiftUI app to showcase [The 🐈‍⬛ API](https://thecatapi.com/).
 ## Possible future work
 * Dark mode support
 * Localization
+* Add pull-down-to-refresh
 * Offline data persistence
 * Favorite breeds/images
 * Tab bar to switch between cats ([The 🐈‍⬛ API](https://thecatapi.com/)) and dogs ([The 🐕 API](https://thedogapi.com/))

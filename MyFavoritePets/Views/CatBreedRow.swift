@@ -28,7 +28,7 @@ struct CatBreedRow: View {
 
     var body: some View {
         HStack {
-            KFImage(URL(string: breed.image?.url ?? ""))
+            KFImage(URL(string: breed.imageURL() ?? ""))
                 .placeholder { Image("CatBreedPlaceholder") }
                 .setProcessor(processor)
                 .fade(duration: 1)

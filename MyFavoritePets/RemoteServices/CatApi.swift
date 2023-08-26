@@ -54,7 +54,9 @@ class CatApi {
                     return continuation.resume(throwing: CatApiError.invalidData)
                 }
                 do {
-                    let catBreeds = try JSONDecoder().decode([CatBreed].self, from: data)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let catBreeds = try decoder.decode([CatBreed].self, from: data)
                     return continuation.resume(returning: catBreeds)
                 } catch {
                     return continuation.resume(throwing: CatApiError.failure(error))

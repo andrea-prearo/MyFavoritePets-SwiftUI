@@ -13,6 +13,13 @@ struct CatBreed: Codable {
     let description: String
     let temperament: String
     let origin: String
-    let image: CatBreedImage?
+    let referenceImageId: String?
     let weight: CatBreedWeight
+
+    func imageURL() -> String? {
+        guard let imageId = referenceImageId else {
+            return nil
+        }
+        return "https://cdn2.thecatapi.com/images/\(imageId).jpg"
+    }
 }
