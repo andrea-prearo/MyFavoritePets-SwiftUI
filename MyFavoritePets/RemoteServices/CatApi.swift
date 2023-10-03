@@ -8,8 +8,10 @@
 import Foundation
 
 enum CatApiError: Error {
+    case unknown
     case failure(Error)
     case invalidUrl(String)
+    case networkError(reason: String)
     case invalidData
     case decodingFailure
 }
@@ -17,10 +19,14 @@ enum CatApiError: Error {
 extension CatApiError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .unknown:
+            return "Unknown failure"
         case .failure(let error):
             return "Failure: \(error.localizedDescription)"
         case .invalidUrl(let url):
             return "Invalid URL: \(url)"
+        case .networkError(let reason):
+            return "API error: \(reason)"
         case .invalidData:
             return "Invalid data"
         case .decodingFailure:
@@ -30,8 +36,6 @@ extension CatApiError: LocalizedError {
 }
 
 class CatApi {
-    static let shared = CatApi()
-
     private let baseUrl: String
 
     init (baseUrl: String = "https://api.thecatapi.com/v1") {
@@ -44,25 +48,33 @@ class CatApi {
             throw CatApiError.invalidUrl(urlString)
         }
 
-        return try await withUnsafeThrowingContinuation { continuation in
-            let request = URLRequest(url: url)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    return continuation.resume(throwing: CatApiError.failure(error))
-                }
-                guard let data = data else {
-                    return continuation.resume(throwing: CatApiError.invalidData)
-                }
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let catBreeds = try decoder.decode([CatBreed].self, from: data)
-                    return continuation.resume(returning: catBreeds)
-                } catch {
-                    return continuation.resume(throwing: CatApiError.failure(error))
-                }
-            }
-            task.resume()
+        let request = URLRequest(url: url)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw CatApiError.unknown
+        }
+        if (httpResponse.statusCode == 401) {
+            throw CatApiError.networkError(reason: "Unauthorized")
+        }
+        if (httpResponse.statusCode == 403) {
+            throw CatApiError.networkError(reason: "Resource forbidden")
+        }
+        if (httpResponse.statusCode == 404) {
+            throw CatApiError.networkError(reason: "Resource not found")
+        }
+        if (405..<500 ~= httpResponse.statusCode) {
+            throw CatApiError.networkError(reason: "client error")
+        }
+        if (500..<600 ~= httpResponse.statusCode) {
+            throw CatApiError.networkError(reason: "server error")
+        }
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let catBreeds = try decoder.decode([CatBreed].self, from: data)
+            return catBreeds
+        } catch {
+            throw CatApiError.failure(error)
         }
     }
 
@@ -72,23 +84,31 @@ class CatApi {
             throw CatApiError.invalidUrl(urlString)
         }
 
-        return try await withUnsafeThrowingContinuation { continuation in
-            let request = URLRequest(url: url)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    return continuation.resume(throwing: CatApiError.failure(error))
-                }
-                guard let data = data else {
-                    return continuation.resume(throwing: CatApiError.invalidData)
-                }
-                do {
-                    let catBreedImages = try JSONDecoder().decode([CatBreedImage].self, from: data)
-                    return continuation.resume(returning: catBreedImages)
-                } catch {
-                    return continuation.resume(throwing: CatApiError.failure(error))
-                }
-            }
-            task.resume()
+        let request = URLRequest(url: url)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw CatApiError.unknown
+        }
+        if (httpResponse.statusCode == 401) {
+            throw CatApiError.networkError(reason: "Unauthorized")
+        }
+        if (httpResponse.statusCode == 403) {
+            throw CatApiError.networkError(reason: "Resource forbidden")
+        }
+        if (httpResponse.statusCode == 404) {
+            throw CatApiError.networkError(reason: "Resource not found")
+        }
+        if (405..<500 ~= httpResponse.statusCode) {
+            throw CatApiError.networkError(reason: "client error")
+        }
+        if (500..<600 ~= httpResponse.statusCode) {
+            throw CatApiError.networkError(reason: "server error")
+        }
+        do {
+            let catBreedImages = try JSONDecoder().decode([CatBreedImage].self, from: data)
+            return catBreedImages
+        } catch {
+            throw CatApiError.failure(error)
         }
     }
 }

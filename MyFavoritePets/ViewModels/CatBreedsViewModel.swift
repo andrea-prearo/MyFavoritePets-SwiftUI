@@ -8,7 +8,7 @@
 import Foundation
 
 class CatBreedsViewModel: ObservableObject {
-    private let api: CatApi
+    private(set) var api: CatApi
 
     @Published var breeds = [CatBreed]()
     @Published var error: Error?

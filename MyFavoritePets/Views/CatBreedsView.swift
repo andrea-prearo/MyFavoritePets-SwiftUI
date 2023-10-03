@@ -40,7 +40,7 @@ struct CatBreedsView: View {
                         NavigationLink(
                             destination: CatBreedDetailsView(
                                 viewModel: CatBreedDetailsViewModel(
-                                    api: CatApi.shared,
+                                    api: viewModel.api,
                                     breed: breed)
                             )
                         ) {

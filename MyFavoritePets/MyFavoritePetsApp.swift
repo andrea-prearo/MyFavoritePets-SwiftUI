@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MyFavoritePetsApp: App {
-    @ObservedObject var viewModel = CatBreedsViewModel(api: CatApi.shared)
+    @ObservedObject var viewModel = CatBreedsViewModel(api: CatApi())
 
     var body: some Scene {
         WindowGroup {
