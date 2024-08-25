@@ -11,11 +11,11 @@ import SwiftUI
 extension CatBreedImage: Identifiable {}
 
 struct CatBreedDetailsView: View {
-    @ObservedObject private var viewModel: CatBreedDetailsViewModel
+    @StateObject var viewModel: CatBreedDetailsViewModel
+    @State var breed: CatBreed
     @State private var didReceiveError = false
     @State private var didSelectItem = false
     @State private var selectedItemIndex: Int?
-    private let breed: CatBreed
 
     private struct Constants {
         static let defaultInsets = EdgeInsets(top: 8, leading: 16, bottom: 8,trailing: 16)
@@ -23,11 +23,6 @@ struct CatBreedDetailsView: View {
         static let carouselImageSize = CGSize(width: 200, height: 200)
         static let viewWidth = Int(UIScreen.main.bounds.width)
         static let viewHeight = Int(UIScreen.main.bounds.height - 80)
-    }
-
-    init(viewModel: CatBreedDetailsViewModel) {
-        self.viewModel = viewModel
-        breed = viewModel.breed
     }
 
     var body: some View {
@@ -98,7 +93,7 @@ struct CatBreedDetailsView: View {
             }
         }
         .navigationBarTitle(breed.name)
-        .onAppear {
+        .task {
             viewModel.refreshBreedDetails()
         }
         .onReceive(viewModel.$error) { error in

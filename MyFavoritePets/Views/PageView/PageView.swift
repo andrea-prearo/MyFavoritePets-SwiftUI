@@ -25,7 +25,7 @@ struct PageView<Page: View>: View {
                         currentPageIndicatorTintColor: currentPageIndicatorTintColor)
                 .frame(width: CGFloat(pages.count * 18))
                 .padding(.trailing)
-        }.onAppear {
+        }.task {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 guard let page = selectedPage else { return }
                 currentPage = page
