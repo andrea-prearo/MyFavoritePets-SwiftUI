@@ -10,7 +10,7 @@ import SwiftUI
 extension CatBreed: Identifiable {}
 
 struct CatBreedsView: View {
-    @ObservedObject private var viewModel: CatBreedsViewModel
+    @StateObject var viewModel: CatBreedsViewModel
     @State private var didReceiveError = false
     @State private var searchText = ""
     @State private var isLoading = false
@@ -21,10 +21,6 @@ struct CatBreedsView: View {
         } else {
             return viewModel.breeds.filter { $0.name.contains(searchText) }
         }
-    }
-
-    init(viewModel: CatBreedsViewModel) {
-        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -41,7 +37,8 @@ struct CatBreedsView: View {
                             destination: CatBreedDetailsView(
                                 viewModel: CatBreedDetailsViewModel(
                                     api: viewModel.api,
-                                    breed: breed)
+                                    breed: breed),
+                                breed: breed
                             )
                         ) {
                             EmptyView()
@@ -54,7 +51,7 @@ struct CatBreedsView: View {
             .navigationTitle("Cat Breeds")
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-        .onAppear {
+        .task {
             isLoading = true
             viewModel.refreshBreeds()
         }
